@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import Clarifai from 'clarifai';
 import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
 import './App.css';
+
+const app = new Clarifai.App({
+  apiKey: '0564725d0e3b4c139f61c35a54d57aaa'
+ });
 
 const particlesOptions = {
   particles: {
@@ -32,6 +37,14 @@ class App extends Component {
 
   onButtonSubmit = () => {
     console.log('click');
+    app.models.predict("0564725d0e3b4c139f61c35a54d57aaa", "https://samples.clarifai.com/face-det.jpg").then(
+    function(response) {
+      console.log(response);
+    },
+    function(err) {
+      // there was an error
+    }
+  );
 
   }
 
